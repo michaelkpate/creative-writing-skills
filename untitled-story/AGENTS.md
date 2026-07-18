@@ -48,6 +48,10 @@ kb/       Durable knowledge base — the story bible:
 skills/   Craft methodology (read-only — never edit these).
 ```
 
+`CLAUDE.md`, `GEMINI.md`, and `.goosehints` are thin pointers to this file for
+harnesses that look for their own filename — this AGENTS.md is the single
+source of truth. If a skill mentions `CLAUDE.md`, it means this file.
+
 ## Conventions
 
 - **Source tagging in brainstorms:** untagged text = the author's;
