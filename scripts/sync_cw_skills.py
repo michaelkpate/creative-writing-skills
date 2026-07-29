@@ -137,7 +137,7 @@ def split_frontmatter(text: str):
 
 
 def body_of(path: pathlib.Path) -> str:
-    _, _, rest = split_frontmatter(path.read_text())
+    _, _, rest = split_frontmatter(path.read_text(encoding="utf-8"))
     return "".join(rest) if isinstance(rest, list) else rest
 
 
@@ -186,10 +186,10 @@ def copy_agent_file(src: pathlib.Path, dst: pathlib.Path) -> bool:
     """Replace one generated cw agent with the scrubbed Mars-lowered agent file."""
     if not src.is_file():
         raise FileNotFoundError(f"Missing {src}")
-    scrubbed = _scrub_agent(src.read_text())
-    if dst.is_file() and dst.read_text() == scrubbed:
+    scrubbed = _scrub_agent(src.read_text(encoding="utf-8"))
+    if dst.is_file() and dst.read_text(encoding="utf-8") == scrubbed:
         return False
-    dst.write_text(scrubbed)
+    dst.write_text(scrubbed, encoding="utf-8")
     return True
 
 
@@ -199,7 +199,8 @@ def build_claude_output() -> pathlib.Path:
     mars_toml = tmp / "mars.toml"
     repo_path = str(REPO).replace("\\", "/")
     mars_toml.write_text(
-        f"""[dependencies.creative-writing-skills]\npath = \"{repo_path}\"\n\n[settings]\ntargets = [\".claude\"]\nagent_emission = \"always\"\nmodels_cache_ttl_hours = 24\n"""
+        f"""[dependencies.creative-writing-skills]\npath = \"{repo_path}\"\n\n[settings]\ntargets = [\".claude\"]\nagent_emission = \"always\"\nmodels_cache_ttl_hours = 24\n""",
+        encoding="utf-8",
     )
     env = os.environ.copy()
     env.pop("MERIDIAN_MANAGED", None)
@@ -226,7 +227,7 @@ def agent_skill_refs(path: pathlib.Path) -> list[str]:
     Handles both Mars format (`creative-writing-skills:skill-name`) and
     Claude/lowered format (bare `skill-name`).
     """
-    _, fm, _ = split_frontmatter(path.read_text())
+    _, fm, _ = split_frontmatter(path.read_text(encoding="utf-8"))
     if fm is None:
         return []
     refs, in_block = [], False
@@ -301,7 +302,7 @@ def run(apply: bool, lint_only: bool = False) -> int:
                     if not dst.is_file():
                         problems.append(f"{name}: cw/agents/{name}.md missing (run --apply)")
                         continue
-                    if _scrub_agent(src.read_text()) != dst.read_text():
+                    if _scrub_agent(src.read_text(encoding="utf-8")) != dst.read_text(encoding="utf-8"):
                         problems.append(f"{name}: cw agent drifted from Mars .claude output (run --apply)")
 
     # 3. Classification completeness: every cw component must be classified.
@@ -321,18 +322,18 @@ def run(apply: bool, lint_only: bool = False) -> int:
 
     # 4. Lint all cw skills: Claude frontmatter, no leaks (SKILL.md + resources).
     for md in sorted(CW_SKILLS.glob("*/SKILL.md")):
-        _, fm, _ = split_frontmatter(md.read_text())
+        _, fm, _ = split_frontmatter(md.read_text(encoding="utf-8"))
         fm_text = "".join(fm or [])
         if MARS_FRONTMATTER.search(fm_text):
             problems.append(f"{md.relative_to(REPO)}: Mars-only frontmatter key")
         if "name:" not in fm_text:
             problems.append(f"{md.relative_to(REPO)}: missing `name`")
-        m = CW_LEAKS.search(md.read_text())
+        m = CW_LEAKS.search(md.read_text(encoding="utf-8"))
         if m:
             problems.append(f"{md.relative_to(REPO)}: leaked Meridian vocab {m.group(0)!r}")
     # Also lint resource files for leaks.
     for md in sorted(CW_SKILLS.rglob("resources/*.md")):
-        m = CW_LEAKS.search(md.read_text())
+        m = CW_LEAKS.search(md.read_text(encoding="utf-8"))
         if m:
             problems.append(f"{md.relative_to(REPO)}: leaked Meridian vocab {m.group(0)!r}")
 
@@ -342,17 +343,17 @@ def run(apply: bool, lint_only: bool = False) -> int:
         for ref in agent_skill_refs(md):
             if ref not in bundled_skills:
                 problems.append(f"{md.relative_to(REPO)}: skills ref '{ref}' not bundled in cw/skills")
-        _, fm, _ = split_frontmatter(md.read_text())
+        _, fm, _ = split_frontmatter(md.read_text(encoding="utf-8"))
         if MARS_FRONTMATTER.search("".join(fm or [])):
             problems.append(f"{md.relative_to(REPO)}: Mars-only frontmatter key")
-        m = CW_LEAKS.search(md.read_text())
+        m = CW_LEAKS.search(md.read_text(encoding="utf-8"))
         if m:
             problems.append(f"{md.relative_to(REPO)}: leaked Meridian vocab {m.group(0)!r}")
 
     # 6. Lint @agent references across all cw markdown (bodies, resources, descriptions).
     all_cw_md = sorted([*CW_SKILLS.rglob("*.md"), *CW_AGENTS.glob("*.md")])
     for md in all_cw_md:
-        text = md.read_text()
+        text = md.read_text(encoding="utf-8")
         for ref in set(re.findall(r"@([a-z][a-z-]+)", text)):
             if ref not in agent_names and ref not in AT_ALLOWLIST:
                 problems.append(f"{md.relative_to(REPO)}: @{ref} does not match a cw agent")
@@ -365,7 +366,7 @@ def run(apply: bool, lint_only: bool = False) -> int:
     import json as _json
     mars_ver = None
     if mars_toml.is_file():
-        for line in mars_toml.read_text().splitlines():
+        for line in mars_toml.read_text(encoding="utf-8").splitlines():
             m = re.match(r'^version\s*=\s*"(.+)"', line)
             if m:
                 mars_ver = m.group(1)
@@ -374,11 +375,13 @@ def run(apply: bool, lint_only: bool = False) -> int:
     # 7a. .claude-plugin/marketplace.json  metadata.version
     marketplace_json = REPO / ".claude-plugin" / "marketplace.json"
     if mars_ver and marketplace_json.is_file():
-        mp = _json.loads(marketplace_json.read_text())
+        mp = _json.loads(marketplace_json.read_text(encoding="utf-8"))
         mp_ver = mp.get("metadata", {}).get("version")
         if mp_ver and mars_ver != mp_ver:
             mp["metadata"]["version"] = mars_ver
-            marketplace_json.write_text(_json.dumps(mp, indent=2) + "\n")
+            marketplace_json.write_text(
+                _json.dumps(mp, indent=2) + "\n", encoding="utf-8"
+            )
             subprocess.run(
                 ["git", "add", str(marketplace_json)],
                 cwd=REPO, capture_output=True,
@@ -388,11 +391,13 @@ def run(apply: bool, lint_only: bool = False) -> int:
     # 7b. cw/.claude-plugin/plugin.json  version
     plugin_json = REPO / "cw" / ".claude-plugin" / "plugin.json"
     if mars_ver and plugin_json.is_file():
-        pj = _json.loads(plugin_json.read_text())
+        pj = _json.loads(plugin_json.read_text(encoding="utf-8"))
         pj_ver = pj.get("version")
         if pj_ver != mars_ver:
             pj["version"] = mars_ver
-            plugin_json.write_text(_json.dumps(pj, indent=2) + "\n")
+            plugin_json.write_text(
+                _json.dumps(pj, indent=2) + "\n", encoding="utf-8"
+            )
             subprocess.run(
                 ["git", "add", str(plugin_json)],
                 cwd=REPO, capture_output=True,
