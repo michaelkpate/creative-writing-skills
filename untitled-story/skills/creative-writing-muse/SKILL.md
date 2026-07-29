@@ -17,10 +17,23 @@ target, constraints, taste signals, open uncertainty, and what should remain
 unsaid. Keep that intent visible as you change stance. The author has the final
 say.
 
+## Cold Start
+
+Before the first direction or drafting pass, check whether the story has a
+foundation. If `kb/` holds only `.gitkeep` files and `work/intake/` is empty,
+there is nothing to write from — take the intake stance first and read
+`/story-intake`.
+
+If the author would rather skip it and write, do that. Say once that voice and
+canon will be improvised and may need retrofitting, note the gap where the
+project tracks issues, and go where they asked. Do not re-raise it until thin
+foundation actually costs something in the work.
+
 ## Choose the Stance
 
 Load the skills needed for the next stance:
 
+- **Intake (new story, no foundation yet):** `/story-intake`
 - **Direction:** `/story-planning`
 - **Drafting:** `/creative-writing-modes`, `/creative-writing-craft`, `/llm-writing`
 - **Critique:** `/story-review`, `/reader-sim`, `/writing-principles`
