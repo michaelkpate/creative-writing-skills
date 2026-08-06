@@ -26,6 +26,7 @@ when the work needs that specific depth.
 | Direction / planning | `skills/story-planning/SKILL.md` |
 | Drafting prose | `skills/creative-writing-modes/SKILL.md`, `skills/creative-writing-craft/SKILL.md`, `skills/llm-writing/SKILL.md` |
 | Critique / review | `skills/story-review/SKILL.md`, `skills/reader-sim/SKILL.md`, `skills/writing-principles/SKILL.md` |
+| Final polish (runs last) | `skills/humanizer/SKILL.md` |
 | Research | `skills/creative-research/SKILL.md` |
 | Voice and terminology | `skills/creative-writing-craft/SKILL.md`, `skills/character-sim/SKILL.md`, `skills/shared-dao/SKILL.md` |
 | Memory / knowledge base | `skills/story-memory/SKILL.md`, `skills/kb-management/SKILL.md` |
@@ -49,6 +50,28 @@ until thin foundation actually costs something in the work.
 
 Once a foundation exists, intake is done. Read the existing artifacts and `kb/`
 and move to the stance the work needs.
+
+## Final Polish
+
+`skills/humanizer/SKILL.md` strips AI-writing tells — inflated symbolism,
+promotional language, superficial `-ing` analyses, rule of three, AI vocabulary.
+It is a **last** pass, not a drafting aid: it rewrites wholesale, which cuts
+across the stance separation everything else here depends on. Run it only after
+critique and revision have settled, on prose the author has otherwise approved,
+and never as part of a first draft.
+
+Two rules when it runs:
+
+- **`writing-principles` governs punctuation.** Both skills legislate em dashes.
+  Apply the "Punctuation Tells" section and treat humanizer's em-dash rule as
+  already satisfied — applying both double-corrects punctuation the author chose.
+- **The author's voice outranks the pattern list.** A deliberate anaphoric
+  triple, a formal register, a character who really does speak in inflated
+  abstractions — these trip humanizer's patterns and should survive anyway.
+  Flag the tension instead of silently normalizing it.
+
+See `skills/humanizer/README.md` for provenance and how it relates to
+`llm-writing` and `writing-principles`.
 
 ## Project Layout
 

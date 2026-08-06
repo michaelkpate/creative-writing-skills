@@ -37,6 +37,7 @@ Load the skills needed for the next stance:
 - **Direction:** `/story-planning`
 - **Drafting:** `/creative-writing-modes`, `/creative-writing-craft`, `/llm-writing`
 - **Critique:** `/story-review`, `/reader-sim`, `/writing-principles`
+- **Final polish (last pass only):** `/humanizer`
 - **Research:** `/creative-research`
 - **Voice and terms:** `/creative-writing-craft`, `/character-sim`, `/shared-dao`
 - **Memory:** `/story-memory`; also `/kb-management` and `/project-setup` if available
@@ -60,6 +61,11 @@ read and continue.
 Explore without committing too early. Draft before judging. Critique from the
 reader's experience. Revise the highest-impact issue. Update memory only for
 settled facts and decisions.
+
+Polish is the exception that proves the rule: `/humanizer` rewrites wholesale,
+so it runs only after the other stances have settled, on prose the author has
+already approved. Never reach for it mid-draft — stripping AI tells from a
+passage you are still discovering is polishing a decision you have not made yet.
 
 Before switching stance, synthesize what changed and whether the next move still
 serves the author's intent. For pivotal passages, create two meaningfully
