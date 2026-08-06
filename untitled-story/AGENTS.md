@@ -33,12 +33,16 @@ when the work needs that specific depth.
 
 ## Starting a Story
 
-This project ships empty. Before planning or drafting, check whether the story
-has a foundation: `kb/` holding nothing but `.gitkeep` files **and** an empty
-`work/intake/` means it does not.
+**Read `STATUS.md` first, before exploring anything.** It records the phase,
+what exists where, and the next action. It exists so you do not have to stat
+fifteen directories to learn they are empty — which is what this project looks
+like until intake runs.
 
-When both are empty, run intake first — read `skills/story-intake/SKILL.md` and
-interview the author into a foundation. It is a budgeted interview (30 questions
+Trust its phase; verify its counts against the tree only when a number actually
+matters. If they disagree, the tree wins — correct `STATUS.md` and carry on.
+
+When `STATUS.md` says `phase: not-started`, run intake first — read
+`skills/story-intake/SKILL.md` and interview the author into a foundation. It is a budgeted interview (30 questions
 maximum) that produces four artifacts in `work/intake/`, then seeds `kb/`,
 `work/outline/`, and the **Voice and Style Goals** section at the bottom of this
 file.
@@ -76,6 +80,8 @@ See `skills/humanizer/README.md` for provenance and how it relates to
 ## Project Layout
 
 ```
+STATUS.md Phase, what exists where, and the next action. Read first, update
+          whenever kb/ is updated. Holds no story facts — those live in kb/.
 story/    Author's manuscript space. Final chapters live here. Never overwrite
           without explicit confirmation.
 work/     Working artifacts: intake/, outline/, drafts/, critique-reports/,
@@ -104,7 +110,9 @@ source of truth. If a skill mentions `CLAUDE.md`, it means this file.
   never surface these in prose.
 - **Memory discipline:** after decisions, chapters, or revisions settle, update
   `kb/` (guided by `skills/story-memory/SKILL.md`) for canon, timeline,
-  character state, relationship changes, and settled decisions. Do **not** let
+  character state, relationship changes, and settled decisions, **and update
+  `STATUS.md`** in the same pass. They share a trigger on purpose — a status
+  file updated on its own schedule is one nobody can trust. Do **not** let
   provisional brainstorms harden into canon.
 - **The author has the final say.** Ask only when the answer would change the
   work; otherwise state your read and proceed so the author can correct it.

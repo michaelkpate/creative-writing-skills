@@ -19,10 +19,10 @@ say.
 
 ## Cold Start
 
-Before the first direction or drafting pass, check whether the story has a
-foundation. If `kb/` holds only `.gitkeep` files and `work/intake/` is empty,
-there is nothing to write from — take the intake stance first and read
-`/story-intake`.
+Read `STATUS.md` at the project root first. It states the phase and the next
+action, so you do not have to explore the tree to discover the project is empty.
+If it says `phase: not-started`, there is nothing to write from — take the
+intake stance first and read `/story-intake`.
 
 If the author would rather skip it and write, do that. Say once that voice and
 canon will be improvised and may need retrofitting, note the gap where the

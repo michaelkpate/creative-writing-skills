@@ -39,13 +39,13 @@ story that already has one.
 
 ## When to Run
 
-Run intake when **both** are true:
+Check `STATUS.md` at the project root. Run intake when it says
+`phase: not-started`, or `phase: intake` with `intake_complete: false` (a run
+that stopped partway — resume it rather than starting over).
 
-- `kb/` holds no story content (only `.gitkeep` files), and
-- `work/intake/` holds no prior artifacts
-
-If either is false, the story already has a foundation. Read the existing
-artifacts and `kb/` instead, and move to the stance the author actually needs.
+At any later phase the story already has a foundation. Read `work/intake/` and
+`kb/` instead, and move to the stance the author actually needs. Do not re-run
+intake on a story that has one.
 
 **Escape hatch.** The author may decline — "skip it, just write." Honor that
 immediately and without argument. Then:
@@ -159,6 +159,12 @@ seed:
 | character | `kb/characters/` — one file per main character |
 | plot beat spine + act structure | `work/outline/` |
 | thin, unresolved, or skipped zones | `kb/issues/` |
+| phase, counts, next action | `STATUS.md` at the project root |
+
+Update `STATUS.md` last, once everything else has landed — it describes the
+state, so writing it first would describe a state that does not exist yet. Move
+the phase to `foundation` on `READY`, or leave it at `intake` on `NOT_READY`
+with the blocking zones named under open questions.
 
 Follow `/story-memory` and `/kb-management` for file conventions.
 
