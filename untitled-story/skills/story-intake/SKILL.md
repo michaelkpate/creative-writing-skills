@@ -184,8 +184,6 @@ seeded in `work/outline/` is a starting spine, not a finished plan.
 - `references/act-structures.md` — act structure guide and decision framework
 - `references/chapter-outline.md` — chapter outline template
 
-These three are local-only and not tracked in git for licensing reasons — see
-`README.md` in this directory. If `references/` is empty, say so plainly rather
-than inventing the worksheet fields or act-structure guidance from memory. You
-can still run intake against the coverage zones listed above; note in
-`WORKSHEET_COVERAGE_REPORT.md` that it ran without the full worksheet.
+Reproduced unmodified from Ekello Harrid's gist with his permission — see
+`README.md`. If a reference is ever missing, say so plainly rather than
+inventing the worksheet fields or act-structure guidance from memory.

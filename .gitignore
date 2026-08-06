@@ -1,11 +1,5 @@
 .DS_Store
 /zips/
-
-# Third-party intake references (30 to Glory, gist FuFicFac/f29ecac587c175280d863bb7ef766222).
-# No stated license, so they are kept on disk for local use only and never
-# redistributed under this repo's Apache-2.0 license. story-intake/SKILL.md
-# reads them at runtime; see untitled-story/skills/story-intake/README.md.
-/untitled-story/skills/story-intake/references/
 /test/
 /.mars/
 /.meridian/
