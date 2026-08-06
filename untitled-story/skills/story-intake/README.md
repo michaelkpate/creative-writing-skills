@@ -1,4 +1,23 @@
-# story-intake — local reference setup
+# story-intake — credit and local reference setup
+
+## Credit
+
+This skill is adapted from **"30 to Glory"** by **Ekello Harrid** (GitHub
+[FuFicFac](https://github.com/FuFicFac), [portfolio](https://ej-student-portal.vercel.app/)),
+published as a gist:
+<https://gist.github.com/FuFicFac/f29ecac587c175280d863bb7ef766222>
+
+His design carries the substance of the skill: the 22/4/4 question budget and
+the hard stop at 30, the six worksheet-critical coverage zones, the
+`COVERED`/`PARTIAL`/`THIN`/`UNRESOLVED` markers, the reserve-question logic, the
+`READY`/`NOT_READY` gate, and the four act structures with the
+ten-chapters-per-act rule. The three reference documents are his as well.
+
+What is local to this project: retargeting the handoff away from
+`book-brain-builder` and into `kb/` + `work/outline/`, the seeding table, the
+escape hatch, and the `AGENTS.md` / muse wiring.
+
+
 
 `SKILL.md` reads three files from `references/` that are **deliberately not in
 git**:

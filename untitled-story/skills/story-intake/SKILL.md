@@ -6,6 +6,13 @@ description: |
 
 # Story Intake — 30 to Glory
 
+Adapted from the "30 to Glory" StoryCraft intake skill by **Ekello Harrid**
+([FuFicFac](https://github.com/FuFicFac),
+[gist](https://gist.github.com/FuFicFac/f29ecac587c175280d863bb7ef766222)).
+The question budget, coverage zones, readiness gate, and act-structure framework
+are his design; the handoff into this project's `kb/` and `work/` layout is the
+local adaptation. See `README.md` for the full provenance note.
+
 The muse's cold-start stance. Takes a raw fiction idea, brain dump, or premise
 fragment and converts it into a story foundation this project can draft from:
 four intake artifacts in `work/intake/`, plus a seeded `kb/`.
